@@ -1,0 +1,2 @@
+client id: 523359522930-tlsejeseuv8pvkgjmk5tfqtur8vv43fi.apps.googleusercontent.com
+client secret: 2qKhjJ4T04JwWthisDjYdcaH
