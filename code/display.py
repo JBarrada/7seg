@@ -20,7 +20,7 @@ E    C
  DDDD  DP
 """
 
-a_seg, b_seg, c_seg, d_seg, e_seg, f_seg, g_seg, dp_seg = range(8)
+a_seg, b_seg, c_seg, d_seg, e_seg, f_seg, g_seg, dp_seg = range(8)  # replace with
 
 chars = [
     [a_seg, b_seg, c_seg, d_seg, e_seg, f_seg],  # 0
