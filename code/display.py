@@ -4,7 +4,7 @@ LED_COUNT = 8
 LED_PIN = 18
 LED_FREQ_HZ = 800000
 LED_DMA = 5
-LED_BRIGHTNESS = 255
+LED_BRIGHTNESS = 100
 LED_INVERT = False   # True to invert the signal (when using NPN transistor level shift)
 
 strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
@@ -20,7 +20,7 @@ E    C
  DDDD  DP
 """
 
-a_seg, b_seg, c_seg, d_seg, e_seg, f_seg, g_seg, dp_seg = range(8)  # replace with
+a_seg, b_seg, c_seg, d_seg, e_seg, f_seg, g_seg, dp_seg = [4, 5, 7, 1, 2, 3, 6, 0]
 
 chars = [
     [a_seg, b_seg, c_seg, d_seg, e_seg, f_seg],  # 0
@@ -44,7 +44,7 @@ chars = [
 
 def set_display(char, dp, color):
     for i in range(8):
-        if (i in char[char]) or ((i == dp_seg) and dp):
+        if (i in chars[char]) or ((i == dp_seg) and dp):
             strip.setPixelColor(i, color)
         else:
             strip.setPixelColor(i, 0)
