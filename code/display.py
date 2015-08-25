@@ -4,7 +4,7 @@ LED_COUNT = 8
 LED_PIN = 18
 LED_FREQ_HZ = 800000
 LED_DMA = 5
-LED_BRIGHTNESS = 255
+LED_BRIGHTNESS = 120
 
 strip = None
 current_color = 0
@@ -47,6 +47,12 @@ def set_display_manual(seg_and_color):
     global strip
     for key in seg_and_color:
         strip.setPixelColor(key, seg_and_color[key])
+    strip.show()
+
+def clear():
+    global strip
+    for i in range(8):
+        strip.setPixelColor(i, 0)
     strip.show()
 
 def init():

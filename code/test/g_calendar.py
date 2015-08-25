@@ -5,10 +5,11 @@ import oauth2client
 from oauth2client import client
 from oauth2client import tools
 import datetime
+import time
 import argparse
 import logging
 
-logging.basicConfig(filename='GCAL.log', level=logging.INFO)
+logging.basicConfig(filename='GCAL_TEST.log', level=logging.INFO)
 
 flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
 
@@ -85,3 +86,19 @@ def init():
     service = discovery.build('calendar', 'v3', http=http)
     logging.info(credentials.to_json())
     get_color_ids()
+
+clocknext = 0
+
+seconds = 0
+init()
+while True:
+    if time.clock() >= clocknext:
+        clocknext = time.clock() + 1
+        logging.info("EXPIRED?? %s" % credentials.access_token_expired)
+        logging.info("TIME:: %d  DATETIME:: %s" % (seconds, datetime.datetime.now().strftime("%H:%M:%S")))
+        print("TIME:: %d" % seconds)
+        update()
+        logging.info("UPDATED")
+        logging.info("------------------------------------")
+        seconds += 1
+
