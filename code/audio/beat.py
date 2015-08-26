@@ -4,7 +4,7 @@ import socket
 import effects
 import struct
 
-CHUNK = 1024
+CHUNK = 4096
 
 conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 conn.connect(('192.168.1.21', 46692))
@@ -13,7 +13,7 @@ e = effects.Effects(conn)
 dr = process_audio.Doctor(44100, 200, 0.05)
 
 p = pyaudio.PyAudio()
-stream = p.open(format=pyaudio.paInt16, channels=1, rate=44100, input=True, frames_per_buffer=CHUNK)
+stream = p.open(format=pyaudio.paInt16, channels=1, rate=44100, input=True, frames_per_buffer=CHUNK, input_device_index=2)
 while True:
     beat = False
     envelope = 0
@@ -25,9 +25,10 @@ while True:
         beat = beat_temp if beat_temp else beat
         envelope += envelope_temp
 
+    envelope /= CHUNK
     if beat:
         e.beat()
 
-    envelope /= CHUNK
-    print('#'*int(envelope*20))  # pound sign VU meter
+    # print envelope
+    # print('#'*int(envelope*20))  # pound sign VU meter
     # todo handle spin with high freq

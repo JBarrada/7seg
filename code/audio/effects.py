@@ -11,13 +11,13 @@ class Effects:
         self.segments = [(0.0, 0.0, 0.0)]*8  # hsv representation
 
         self.current_color = (0.0, 0.0, 0.0)
-        self.color_speed = 0.01
-        self.color_decay = 0.01
+        self.color_speed = 0.001
+        self.color_decay = 0.02
 
         self.spin_direction = 1  # clockwise
         self.spin_position = 0
         self.spin_buffer = 0.0
-        self.spin_speed = 0.1
+        self.spin_speed = 0.05
 
         self.l = threading.Thread(target=self.loop)
         self.l.daemon = True
@@ -33,8 +33,8 @@ class Effects:
 
         min_v = 0.6
 
-        self.segments[a[self.spin_position]] = (color[0], 100, max(min_v, self.segments[a[self.spin_position]][2]))
-        self.segments[b[self.spin_position]] = (color[0], 100, max(min_v, self.segments[b[self.spin_position]][2]))
+        self.segments[a[self.spin_position]] = (color[0], 1.0, max(min_v, self.segments[a[self.spin_position]][2]))
+        self.segments[b[self.spin_position]] = (color[0], 1.0, max(min_v, self.segments[b[self.spin_position]][2]))
 
     def beat(self):
         min_dist = 0.2
@@ -53,11 +53,11 @@ class Effects:
         data = []
         for i in range(8):
             rgb = colorsys.hsv_to_rgb(self.segments[i][0], self.segments[i][1], self.segments[i][2])
-            data.append(int(rgb[0]*255))
-            data.append(int(rgb[1]*255))
-            data.append(int(rgb[2]*255))
+            data.append(min(int(rgb[0]*255), 255))
+            data.append(min(int(rgb[1]*255), 255))
+            data.append(min(int(rgb[2]*255), 255))
         # send through tcp
-        self.conn.sendall(''.join(map(chr, data)))
+        self.conn.sendall(str(bytearray(data)))
 
     def advance(self):
         self.decay()
