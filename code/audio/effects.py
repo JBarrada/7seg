@@ -12,12 +12,12 @@ class Effects:
 
         self.current_color = (0.0, 0.0, 0.0)
         self.color_speed = 0.001
-        self.color_decay = 0.02
+        self.color_decay = 0.04
 
         self.spin_direction = 1  # clockwise
         self.spin_position = 0
         self.spin_buffer = 0.0
-        self.spin_speed = 0.05
+        self.spin_speed = 0.1
 
         self.l = threading.Thread(target=self.loop)
         self.l.daemon = True

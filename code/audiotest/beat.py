@@ -10,7 +10,7 @@ import struct
 CHUNK = 2048
 dr = process_audio.Doctor(44100, 200, 0.05)
 
-wf = wave.open("C:\\Users\\Justin B\\Documents\\audiotest\\test.wav", 'rb')
+wf = wave.open("C:\\Users\\dinosaur\\Documents\\7seg\code\\audiotest\\test.wav", 'rb')
 
 p = pyaudio.PyAudio()
 stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),

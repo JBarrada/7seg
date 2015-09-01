@@ -1,5 +1,6 @@
 import pyaudio
 import math
+import schmitt
 
 
 class Doctor:
@@ -11,11 +12,10 @@ class Doctor:
         self.filter1_out = 0
         self.filter2_out = 0
         self.peak_envelope = 0
-        self.beat_previous = False
-        self.schmitt_min = 0.3
-        self.schmitt_max = 0.5
+        # self.beat_previous = False
+        self.s = schmitt.Schmitt(0.5, 0.7)
 
-        self.min_hit = False
+        # self.min_hit = False
 
     def feed_sample(self, sample):
         self.filter1_out += (self.filter_coeff * (sample - self.filter1_out))
@@ -37,14 +37,16 @@ class Doctor:
         # event = True if beat and not self.beat_previous else False
         # self.beat_previous = beat
 
-        if not self.min_hit & (self.peak_envelope < self.schmitt_min):
-            self.min_hit = True
+        event = self.s.feed(self.peak_envelope)
 
-        max_hit = True if self.peak_envelope > self.schmitt_max else False
-
-        event = False
-        if max_hit and self.min_hit:
-            self.min_hit = False
-            event = True
+        # if not self.min_hit & (self.peak_envelope < self.schmitt_min):
+        #     self.min_hit = True
+        #
+        # max_hit = True if self.peak_envelope > self.schmitt_max else False
+        #
+        # event = False
+        # if max_hit and self.min_hit:
+        #     self.min_hit = False
+        #     event = True
 
         return event, self.peak_envelope
