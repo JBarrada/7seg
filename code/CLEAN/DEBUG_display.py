@@ -29,6 +29,8 @@ chars = [
     [a_seg, b_seg, c_seg, d_seg, e_seg, f_seg],  # D
     [a_seg, d_seg, e_seg, f_seg, g_seg],  # E
     [a_seg, e_seg, f_seg, g_seg],  # F
+
+    [c_seg, e_seg, f_seg, g_seg]  # h
 ]
 
 def color_to_rgb(colorhex):
@@ -53,8 +55,8 @@ def set_display_manual(seg_and_color):
 
 def clear():
     global rects
-    # for r in rects:
-    #     r.setFill(color_rgb(240, 240, 240))
+    for r in rects:
+        r.setFill(color_rgb(240, 240, 240))
 
 def init_thread():
     global win, a_seg_rect, b_seg_rect, c_seg_rect, d_seg_rect, e_seg_rect, f_seg_rect, g_seg_rect, dp_seg_rect, rects

@@ -1,5 +1,4 @@
 import datetime
-import pytz
 import dateutil.parser
 import time
 import g_calendar
@@ -37,24 +36,26 @@ def blink_events():
 
         event_date = dateutil.parser.parse(event['start']['dateTime'] if 'dateTime' in event['start'] else event['start']['date'])
 
-        delta = event_date - pytz.utc.localize(datetime.datetime.now())
-        print("TITLE: %s" % event['summary'])
-        print(delta)
-        print("---------------------------")
+        event_date = event_date.replace(tzinfo=None)
+        delta = event_date - datetime.datetime.now()
 
-        if "colorId" in event:
-            display.set_display_manual({0: g_calendar.color_ids[event["colorId"]]})
+        if delta < datetime.timedelta(hours=10):
+            display.clear()
+            time.sleep(0.5)
+            display.set_display(int(delta.seconds / 3600), True, blink_color)
+            time.sleep(0.5)
+            display.set_display(16, False, blink_color)
+            time.sleep(0.5)
+            display.clear()
         else:
-            display.set_display_manual({0: 0xffffff})
-
+            display.set_display_manual({0: blink_color})
+            time.sleep(0.5)
+            display.set_display_manual({0: 0})
         time.sleep(0.5)
-        display.set_display_manual({0: 0})
-        time.sleep(0.5)
-    # display.set_display_manual({0: dp_off_color})
 
 # main
 display.init()
-display.clear()
+# display.clear()
 g_calendar.init()
 tcpserver.init()
 while True:

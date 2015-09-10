@@ -30,6 +30,8 @@ chars = [
     [a_seg, b_seg, c_seg, d_seg, e_seg, f_seg],  # D
     [a_seg, d_seg, e_seg, f_seg, g_seg],  # E
     [a_seg, e_seg, f_seg, g_seg],  # F
+
+    [c_seg, e_seg, f_seg, g_seg]  # h
 ]
 
 def set_display(char, dp, color):
