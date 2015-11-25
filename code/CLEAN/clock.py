@@ -3,6 +3,7 @@ import dateutil.parser
 import time
 import g_calendar
 import tcpserver
+import pywapi
 
 try:
     import display
@@ -16,11 +17,12 @@ colors = [0xe74c3c, 0xe67e22, 0xf1c40f, 0x2ecc71, 0x3498db, 0x1abc9c, 0x9b59b6]
 next_update_clock = 0
 next_update_calendar = 0
 next_calendar_notification = 0
+next_weather_notification = 0
 
 def update_clock():
     time_now = datetime.datetime.now().time()
     hour = time_now.hour if time_now.hour <= 12 else time_now.hour - 12
-    color = colors[time_now.minute / 15]
+    color = colors[[0, 1, 4, 6][time_now.minute / 15]]
     display.set_display(hour, hour < 10, color)
 
 def attention_dp():
@@ -28,6 +30,15 @@ def attention_dp():
         display.set_display_manual({0: colors[i % 6]})
         time.sleep(2.0 / 24.0)
     display.set_display_manual({0: 0})
+    time.sleep(1)
+
+def blink_weather():
+    weather_com_result = pywapi.get_weather_from_weather_com('78728')
+    temp_now_f = str(int(float(weather_com_result['current_conditions']['temperature'])*1.8+32.0))
+    for ch in temp_now_f:
+        display.set_display(int(ch), False, 0xffffff)
+        time.sleep(0.5)
+    display.set_display(17, False, 0xffffff)
     time.sleep(1)
 
 def blink_events():
@@ -73,6 +84,12 @@ while True:
                     attention_dp()
                     blink_events()
                     update_clock()
+
+            if time.time() > next_weather_notification:
+                next_weather_notification = time.time() + 60
+                attention_dp()
+                blink_weather()
+                update_clock()
 
             if time.time() > next_update_clock:
                 next_update_clock = time.time() + 30

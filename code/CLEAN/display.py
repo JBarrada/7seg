@@ -31,7 +31,8 @@ chars = [
     [a_seg, d_seg, e_seg, f_seg, g_seg],  # E
     [a_seg, e_seg, f_seg, g_seg],  # F
 
-    [c_seg, e_seg, f_seg, g_seg]  # h
+    [c_seg, e_seg, f_seg, g_seg],  # h
+    [f_seg, a_seg, b_seg, g_seg]  # degree
 ]
 
 def set_display(char, dp, color):
