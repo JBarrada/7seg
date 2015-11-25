@@ -120,7 +120,7 @@ while True:
         oavg.setWidth(3)
         oavg.setFill('pink')
         oavg.draw(win)
-        dr.s.high = oa + 0.09
+        # dr.s.high = oa + 0.09
 
     # print envelope
     # print('#'*int(envelope*20))  # pound sign VU meter
