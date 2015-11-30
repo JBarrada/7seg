@@ -4,6 +4,7 @@ import time
 import g_calendar
 import tcpserver
 import pywapi
+import random
 
 try:
     import display
@@ -19,11 +20,13 @@ next_update_calendar = 0
 next_calendar_notification = 0
 next_weather_notification = 0
 
+
 def update_clock():
     time_now = datetime.datetime.now().time()
     hour = time_now.hour if time_now.hour <= 12 else time_now.hour - 12
     color = colors[[0, 1, 4, 6][time_now.minute / 15]]
-    display.set_display(hour, hour < 10, color)
+    display.set_display_fade(hour, hour < 10, color, 1000)
+
 
 def attention_dp():
     for i in range(24):
@@ -32,14 +35,32 @@ def attention_dp():
     display.set_display_manual({0: 0})
     time.sleep(1)
 
+
 def blink_weather():
     weather_com_result = pywapi.get_weather_from_weather_com('78728')
+    mycol = random.randint(0, 6)
+
     temp_now_f = str(int(float(weather_com_result['current_conditions']['temperature'])*1.8+32.0))
     for ch in temp_now_f:
-        display.set_display(int(ch), False, 0xffffff)
-        time.sleep(0.5)
-    display.set_display(17, False, 0xffffff)
+        mycol = (mycol+1) % 7
+        display.set_display_fade(int(ch), False, colors[mycol], 300)
+    mycol = (mycol+1) % 7
+    display.set_display_fade(17, False, colors[mycol], 300)
+    mycol = (mycol+1) % 7
+    display.set_display_fade(15, False, colors[mycol], 300)
+    time.sleep(0.5)
+
+    temp_now_c = weather_com_result['current_conditions']['temperature']
+    for ch in temp_now_c:
+        mycol = (mycol+1) % 7
+        display.set_display_fade(int(ch), False, colors[mycol], 300)
+    mycol = (mycol+1) % 7
+    display.set_display_fade(17, False, colors[mycol], 300)
+    mycol = (mycol+1) % 7
+    display.set_display_fade(12, False, colors[mycol], 300)
+
     time.sleep(1)
+
 
 def blink_events():
     for event in g_calendar.events:
