@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "seg_helper", "seg_helper\seg_helper.vbproj", "{D9F9A298-C0DE-4377-9F2D-5A2217EE8B60}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D9F9A298-C0DE-4377-9F2D-5A2217EE8B60}.Debug|x86.ActiveCfg = Debug|x86
+		{D9F9A298-C0DE-4377-9F2D-5A2217EE8B60}.Debug|x86.Build.0 = Debug|x86
+		{D9F9A298-C0DE-4377-9F2D-5A2217EE8B60}.Release|x86.ActiveCfg = Release|x86
+		{D9F9A298-C0DE-4377-9F2D-5A2217EE8B60}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

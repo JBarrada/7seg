@@ -1,0 +1,30 @@
+﻿<Window x:Class="MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="MainWindow" Height="489" Width="288" Background="#FF404040">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
+        <TextBox Grid.Row="5" Name="TextBox1" FontFamily="Consolas" TextWrapping="Wrap" Grid.ColumnSpan="4" />
+        <Rectangle Name="a_seg_disp" Stroke="{x:Null}" Grid.Column="1" Cursor="Hand" Fill="Gray" />
+        <Rectangle Cursor="Hand" Fill="Gray" Name="b_seg_disp" Stroke="{x:Null}" Grid.Column="2" Grid.Row="1" />
+        <Rectangle Cursor="Hand" Fill="Gray" Name="c_seg_disp" Stroke="{x:Null}" Grid.Column="2" Grid.Row="3" />
+        <Rectangle Cursor="Hand" Fill="Gray" Name="d_seg_disp" Stroke="{x:Null}" Grid.Column="1" Grid.Row="4" />
+        <Rectangle Cursor="Hand" Fill="Gray" Name="e_seg_disp" Stroke="{x:Null}" Grid.Row="3" />
+        <Rectangle Cursor="Hand" Fill="Gray" Name="f_seg_disp" Stroke="{x:Null}" Grid.Row="1" />
+        <Rectangle Cursor="Hand" Fill="Gray" Name="g_seg_disp" Stroke="{x:Null}" Grid.Column="1" Grid.Row="2" />
+        <Rectangle Cursor="Hand" Fill="Gray" Name="dp_seg_disp" Stroke="{x:Null}" Grid.Column="3" Grid.Row="4" />
+    </Grid>
+</Window>
