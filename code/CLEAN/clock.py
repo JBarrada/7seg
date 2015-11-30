@@ -50,13 +50,17 @@ def blink_weather():
     display.set_display_fade(15, False, colors[mycol], 300)
     time.sleep(0.5)
 
+    mycol = (mycol+1) % 7
     temp_now_c = weather_com_result['current_conditions']['temperature']
     for ch in temp_now_c:
         mycol = (mycol+1) % 7
         display.set_display_fade(int(ch), False, colors[mycol], 300)
     mycol = (mycol+1) % 7
     display.set_display_fade(17, False, colors[mycol], 300)
-    mycol = (mycol+1) % 7
+    mycol = (colors.index(display.current_color) + 1) % 7
+
+
+
     display.set_display_fade(12, False, colors[mycol], 300)
 
     time.sleep(1)
@@ -107,7 +111,7 @@ while True:
                     update_clock()
 
             if time.time() > next_weather_notification:
-                next_weather_notification = time.time() + 60
+                next_weather_notification = time.time() + 30
                 attention_dp()
                 blink_weather()
                 update_clock()
